@@ -2,7 +2,7 @@ import torch
 from PIL import Image
 import sys
 import statistics
-sys.path.append('/content/vietnamese-scenetext-detection-recognition-api/src')
+sys.path.append('/content/Run_parseq_ocr/parseq')
 
 from parseq.strhub.data.module import SceneTextDataModule
 from parseq.strhub.models.utils import load_from_checkpoint
@@ -18,13 +18,10 @@ class PARSeqPredictor:
         return parseq, img_transform
 
     @torch.inference_mode()
-    def predict(self, image_paths):
-        results = []
-        for image_path in image_paths:
-            image = Image.open(image_path).convert("RGB")
-            pred_text, confidence = self.predict_parseq(image)
-            results.append((pred_text, confidence))
-        return results
+    def predict(self, image_path):
+        image = Image.open(image_path).convert("RGB")
+        pred_text, confidence = self.predict_parseq(image)
+        return pred_text, confidence
 
     @torch.inference_mode()
     def predict_parseq(self, image):
@@ -33,3 +30,8 @@ class PARSeqPredictor:
         pred, p = self.parseq.tokenizer.decode(p)
         return (pred, statistics.mean(p[0].tolist()))
 
+def predict(checkpoint_path, image_path, device='cuda'):
+    predictor = PARSeqPredictor(checkpoint_path, device)
+    pred_text, confidence = predictor.predict(image_path)
+    print(f"Văn bản dự đoán: {pred_text}")
+    print(f"Độ tin cậy: {confidence:.4f}")
