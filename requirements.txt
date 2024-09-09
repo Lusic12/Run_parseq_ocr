@@ -1,4 +1,4 @@
-
+pip==23.0.1
 torch
 lmdb==1.5.1
 timm==1.0.9
