@@ -27,8 +27,8 @@ from torch import Tensor
 from pytorch_lightning.utilities.types import STEP_OUTPUT
 from timm.models.helpers import named_apply
 
-from src.parseq.strhub.models.base import CrossEntropySystem
-from src.parseq.strhub.models.utils import init_weights
+from parseq.strhub.models.base import CrossEntropySystem
+from parseq.strhub.models.utils import init_weights
 from .modules import DecoderLayer, Decoder, Encoder, TokenEmbedding
 
 
