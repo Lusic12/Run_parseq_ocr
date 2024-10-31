@@ -34,9 +34,8 @@
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/username/image-recognition-project.git
-   cd image-recognition-project
-
+   git clone https://github.com/Lusic12/Run_parseq_ocr.git
+   cd Run_parseq_ocr/
 2. **Create and activate a virtual environment**
 
 
