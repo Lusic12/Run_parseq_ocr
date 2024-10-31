@@ -4,7 +4,6 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Inference](#Inference on gooogle colab)
@@ -15,12 +14,6 @@
 
  This project uses the **Parseg model**, which was trained on a Vietnamese dataset. The Parseg model can predict only characters from image input; it is in phase 2 of OCR. Therefore, the input image is the result of a model that can find word positions.
 
-## Features
-
-- **High-accuracy image classification**
-- **Multi-object recognition** within a single image
-- **User-friendly interface** for easy image upload and processing
-- **RESTful API** for integration with other applications
 
 ## Technologies Used
 
