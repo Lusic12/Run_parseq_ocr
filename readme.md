@@ -1,4 +1,4 @@
-# AI Project - Image Recognition
+# AI Project - OCR
 
 
 ## Table of Contents
@@ -7,7 +7,7 @@
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Inference](#Inference on gooogle colab)
 
 ---
 
