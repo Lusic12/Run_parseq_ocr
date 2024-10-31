@@ -2,6 +2,8 @@ import torch
 from PIL import Image
 import sys
 import statistics
+import os
+from tqdm import tqdm
 sys.path.append('/content/Run_parseq_ocr/parseq')
 
 from parseq.strhub.data.module import SceneTextDataModule
@@ -30,8 +32,32 @@ class PARSeqPredictor:
         pred, p = self.parseq.tokenizer.decode(p)
         return (pred, statistics.mean(p[0].tolist()))
 
-def predict(checkpoint_path, image_path, device='cuda'):
+def predict_multiple(checkpoint_path, image_dir, device='cuda'):
     predictor = PARSeqPredictor(checkpoint_path, device)
-    pred_text, confidence = predictor.predict(image_path)
-    print(f"Văn bản dự đoán: {pred_text}")
-    print(f"Độ tin cậy: {confidence:.4f}")
+    results = []
+
+    # Lấy danh sách tất cả các file ảnh trong thư mục
+    image_files = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif'))]
+
+    # Sử dụng tqdm để hiển thị thanh tiến trình
+    for image_file in tqdm(image_files, desc="Processing images"):
+        image_path = os.path.join(image_dir, image_file)
+        try:
+            pred_text, confidence = predictor.predict(image_path)
+            results.append({
+                'file': image_file,
+                'predicted_text': pred_text,
+                'confidence': confidence
+            })
+        except Exception as e:
+            print(f"Error processing {image_file}: {str(e)}")
+
+    # In kết quả
+    for result in results:
+        print(f"File: {result['file']}")
+        print(f"Văn bản dự đoán: {result['predicted_text']}")
+        print(f"Độ tin cậy: {result['confidence']:.4f}")
+        print("-" * 50)
+
+    return results
+
