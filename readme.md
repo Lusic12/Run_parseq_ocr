@@ -6,7 +6,7 @@
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
-- [Inference](#Inference on gooogle colab)
+- [Inference](#inference-on-gooogle-colab)
 
 ---
 
